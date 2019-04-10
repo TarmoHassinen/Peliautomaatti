@@ -381,42 +381,42 @@ bool loadMedia()
     bool success = true;
     
     //Kuvien lataaminen polusta
-    background.loadFromFile( "Peliautomaatti/background.png" );
-    ApilaKuvioRulla.loadFromFile( "Peliautomaatti/apilakuvio.png" );
-    PelaaNappi.loadFromFile( "Peliautomaatti/pelaa_nappi.png" );
-    PanosNappi.loadFromFile( "Peliautomaatti/panos_nappi.png" );
-    PelaaNappiPainettu.loadFromFile( "Peliautomaatti/pelaa_nappi_painettu.png" );
-    PanosNappiPainettu.loadFromFile( "Peliautomaatti/panos_nappi_painettu.png" );
-    TahtiKuvioRulla.loadFromFile( "Peliautomaatti/tahtikuvio.png" );
-    MansikkaKuvioRulla.loadFromFile( "Peliautomaatti/mansikkakuvio.png" );
-    MeloniKuvioRulla.loadFromFile( "Peliautomaatti/melonikuvio.png" );
-    BanaaniKuvioRulla.loadFromFile( "Peliautomaatti/banaanikuvio.png" );
-    ViinirypaleKuvioRulla.loadFromFile( "Peliautomaatti/viinirypalekuvio.png" );
-    PyorivaRulla.loadFromFile( "Peliautomaatti/pyoriva_rulla.png" );
+    background.loadFromFile( "Media/background.png" );
+    ApilaKuvioRulla.loadFromFile( "Media/apilakuvio.png" );
+    PelaaNappi.loadFromFile( "Media/pelaa_nappi.png" );
+    PanosNappi.loadFromFile( "Media/panos_nappi.png" );
+    PelaaNappiPainettu.loadFromFile( "Media/pelaa_nappi_painettu.png" );
+    PanosNappiPainettu.loadFromFile( "Media/panos_nappi_painettu.png" );
+    TahtiKuvioRulla.loadFromFile( "Media/tahtikuvio.png" );
+    MansikkaKuvioRulla.loadFromFile( "Media/mansikkakuvio.png" );
+    MeloniKuvioRulla.loadFromFile( "Media/melonikuvio.png" );
+    BanaaniKuvioRulla.loadFromFile( "Media/banaanikuvio.png" );
+    ViinirypaleKuvioRulla.loadFromFile( "Media/viinirypalekuvio.png" );
+    PyorivaRulla.loadFromFile( "Media/pyoriva_rulla.png" );
     
     //Ääniefektien lataaminen poluista
-    RullaPyorii = Mix_LoadWAV( "Peliautomaatti/rulla_pyorii.wav" );
+    RullaPyorii = Mix_LoadWAV( "Media/rulla_pyorii.wav" );
     if( RullaPyorii == NULL )
     {
         printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
         success = false;
     }
     
-    RullaPysahtyyChunk = Mix_LoadWAV( "Peliautomaatti/rulla_pysahtyy.wav" );
+    RullaPysahtyyChunk = Mix_LoadWAV( "Media/rulla_pysahtyy.wav" );
     if( RullaPysahtyyChunk == NULL )
     {
         printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
         success = false;
     }
     
-    PieniVoitto = Mix_LoadWAV( "Peliautomaatti/pieni_voitto.wav" );
+    PieniVoitto = Mix_LoadWAV( "Media/pieni_voitto.wav" );
     if( PieniVoitto == NULL )
     {
         printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
         success = false;
     }
     
-    NapinPainallus = Mix_LoadWAV( "Peliautomaatti/napin_painallus.wav" );
+    NapinPainallus = Mix_LoadWAV( "Media/napin_painallus.wav" );
     if( NapinPainallus == NULL )
     {
         printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
@@ -424,7 +424,7 @@ bool loadMedia()
     }
     
     //Avaa fontti
-    gFont = TTF_OpenFont( "Peliautomaatti/LCD.ttf", 28 );
+    gFont = TTF_OpenFont( "Media/LCD.ttf", 28 );
     if( gFont == NULL )
     {
         printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
