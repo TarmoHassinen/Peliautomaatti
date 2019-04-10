@@ -983,7 +983,6 @@ int main( int argc, char* args[] )
             }
         }
     }
-    
     //Vapauttaa resurssit ja sulkee SDL:län
     close();
     
