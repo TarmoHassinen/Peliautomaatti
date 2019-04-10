@@ -4,7 +4,6 @@
 //  Created by Tarmo Hassinen on 14/03/2019.
 //  Copyright © 2019 TarmoH. All rights reserved.
 //
-
 //SDL ja standard IO
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_log.h>
@@ -22,14 +21,14 @@
 #include <sstream>
 #include <iomanip>
 
-
 using namespace std;
 
 //Ruudun mitat vakiot
 const int SCREEN_WIDTH = 850;
 const int SCREEN_HEIGHT = 650;
 
-/*Tämä koodin osa (class LTexture) alun perin Lazy Foo' Productionsilta
+
+/*Tämä koodinpätkä (class LTexture) alun perin Lazy Foo' Productionsilta
  (http://lazyfoo.net/)*/
 
 //Tekstuuri luokka
@@ -76,14 +75,13 @@ private:
     int mHeight;
 };
 
-
 //Käynnistää SDL:län ja luo ikkunan
 bool init();
 
 //Lataa median
 bool loadMedia(); 
 
-//Vapauttaa median ja sammuttaa SDL:län
+//Vapauttaa median ja sulkee SDL:län
 void close();
 
 //Lataa tietyn kuvan tekstuurina
@@ -123,7 +121,7 @@ double ViinirypaleVoittoKerroin;
 //Voiton määrän, panoksen määrän ja saldon määrän alustus
 double VoittoMaara;
 double PanosMaara = 0.20;
-double SaldoMaara = 2.00;
+double SaldoMaara = 20.00;
 
 //Tekstien tekstuureiden renderöinti
 LTexture voitto;
@@ -155,7 +153,6 @@ LTexture PanosNappi;
 LTexture PelaaNappiPainettu;
 LTexture PanosNappiPainettu;
 
-
 LTexture::LTexture()
 {
     //Alustus
@@ -170,7 +167,8 @@ LTexture::~LTexture()
     free();
 }
 
-/*Tämä koodin osa (bool LTexture::loadFromFile) alun perin Lazy Foo' Productionsilta
+
+/*Tämä koodinpätkä (bool LTexture::loadFromFile) alun perin Lazy Foo' Productionsilta
  (http://lazyfoo.net/)*/
 
 bool LTexture::loadFromFile( std::string path )
@@ -305,7 +303,7 @@ int LTexture::getHeight()
 }
 
 
-/*Tämä koodin osa (bool init()) alun perin Lazy Foo' Productionsilta
+/*Tämä koodinpätkä (bool init()) alun perin Lazy Foo' Productionsilta
  (http://lazyfoo.net/)*/
 
 bool init()
@@ -373,7 +371,6 @@ bool init()
             }
         }
     }
-
     
     return success;
 }
@@ -396,7 +393,6 @@ bool loadMedia()
     BanaaniKuvioRulla.loadFromFile( "Peliautomaatti/banaanikuvio.png" );
     ViinirypaleKuvioRulla.loadFromFile( "Peliautomaatti/viinirypalekuvio.png" );
     PyorivaRulla.loadFromFile( "Peliautomaatti/pyoriva_rulla.png" );
-
     
     //Ääniefektien lataaminen poluista
     RullaPyorii = Mix_LoadWAV( "Peliautomaatti/rulla_pyorii.wav" );
@@ -437,7 +433,7 @@ bool loadMedia()
     else
     
     {
-        //Renderöi voiton määrä -teksti
+        //Renderöi voiton määrä -tekstin
         SDL_Color textColor = { 255, 0, 0 };
         if( !voitto.loadFromRenderedText( "-", textColor ) )
         {
@@ -447,8 +443,7 @@ bool loadMedia()
     }
     
     {
-        //Renderöi panoksen määrä -teksti
-
+        //Renderöi panoksen määrä -tekstin
         std::string out_string2;
         std::stringstream ss2;
         ss2 << PanosMaara;
@@ -464,8 +459,7 @@ bool loadMedia()
     }
     
     {
-        //Renderöi saldon määrä -teksti
-        
+        //Renderöi saldon määrä -tekstin
         std::string out_string3;
         std::stringstream ss3;
         ss3 << SaldoMaara;
@@ -527,7 +521,6 @@ void close()
     SDL_Quit();
 }
 
-
 SDL_Texture* loadTexture( std::string path )
 {
     //Lopullinen tekstuuri
@@ -553,10 +546,7 @@ SDL_Texture* loadTexture( std::string path )
     }
     
     return newTexture;
-    
 }
-
-
 
 int main( int argc, char* args[] )
 {
@@ -617,13 +607,13 @@ int main( int argc, char* args[] )
                     PelaaNappi.render( 580, 450 );
                     PanosNappi.render( 120, 450 );
                     
-                    //Renderöi voiton määrä
+                    //Renderöi voiton määrän näytölle
                     voitto.render( 460 - voitto.getWidth(), 58 );
                     
-                    //Renderöi panoksen määrä
+                    //Renderöi panoksen määrän näytölle
                     panos.render( 565 - panos.getWidth(), 58 );
                     
-                    //Renderöi saldon määrä
+                    //Renderöi saldon määrän näytölle
                     saldo.render( 705 - saldo.getWidth() , 58 );
                     
                     //Päivittää näytön
@@ -924,43 +914,39 @@ int main( int argc, char* args[] )
                                             ViinirypaleVoittoKerroin = 3.25;
                                         }
                                         
+                                        //Laskee yhteen voittokertoimet
                                         YhteisVoittoKerroin = ApilaVoittoKerroin + TahtiVoittoKerroin + MansikkaVoittoKerroin + MeloniVoittoKerroin + BanaaniVoittoKerroin + ViinirypaleVoittoKerroin;
                                         
+                                        //Kertoo voittokertoimen panoksella
                                         VoittoMaara = YhteisVoittoKerroin * PanosMaara;
                                         
+                                        //Lisää voiton pelisaldoon
                                         SaldoMaara = SaldoMaara + VoittoMaara;
                                         
                                         cout << YhteisVoittoKerroin << endl;
                                         
                                         cout << VoittoMaara << endl;
                                         
+                                        //Muuttaa kokonaisluvun merkkijonoksi
                                         std::string out_string;
                                         std::stringstream ss;
                                         ss << VoittoMaara;
                                         out_string = ss.str();
-                                            
+                                        
+                                        //Renderöi voiton määrä -tekstin
                                         SDL_Color textColor = { 255, 0, 0 };
                                         voitto.loadFromRenderedText( ss.str(), textColor );
                                         
-                                        std::string out_string2;
-                                        std::stringstream ss2;
-                                        ss2 << PanosMaara;
-                                        out_string2 = ss2.str();
-                                        
-                                        panos.loadFromRenderedText( ss2.str(), textColor );
-                                        
-                                            
+                                        //Muuttaa kokonaisluvun merkkijonoksi
                                         std::string out_string3;
                                         std::stringstream ss3;
                                         ss3 << SaldoMaara;
                                         out_string = ss3.str();
-                                            
+                                        
+                                        //Renderöi saldon määrä -tekstin
                                         saldo.loadFromRenderedText( ss3.str(), textColor );
                                             
-                                            cout.width(15);
-                                            cout << "kyllakylla" << endl;
-
-                                            
+                                            //Toistaa voiton ääniefektin, kun pelistä tulee voitto
                                             if (YhteisVoittoKerroin > 0) {
                                                 Mix_PlayChannel( -1, PieniVoitto, 0);
                                             }
@@ -968,38 +954,37 @@ int main( int argc, char* args[] )
                                     }
                                 }
     
-                                // Panos napin nostaminen
+                                // Panos -napin nostaminen
                                 if (e.type == SDL_MOUSEBUTTONUP)
                                 {
+                                    //Panos -napin painamisen sijainti
                                     if(e.button.x <= 284 && e.button.x >= 120 && e.button.y <= 570 && e.button.y >= 450)
                                     {
+                                        //Nostaa panosta 0.2 yksikköä nappia painettaessa maksimipanos 2.0:aan asti, jonka jälkeen panos on taas 0.2
                                         PanosMaara += 0.2;
                                         if (PanosMaara > 2.0) {
                                             PanosMaara = 0.2;
                                             cout << PanosMaara << endl;
                                         }
                                         
+                                        //Muuttaa kokonaisluvun merkkijonoksi
                                         cout << PanosMaara << endl;
                                         std::string out_string2;
                                         std::stringstream ss2;
                                         ss2 << PanosMaara;
                                         out_string2 = ss2.str();
                                         
+                                        //Renderöi panostekstin
                                         SDL_Color textColor = { 255, 0, 0 };
                                         panos.loadFromRenderedText( ss2.str(), textColor );
-                                        
-                                        //Render current frame
-                                        panos.render( 565 - panos.getWidth(), 58 );
-
                                     }
                                 }
                 }
             }
         }
     }
-
     
-    //Free resources and close SDL
+    //Vapauttaa resurssit ja sulkee SDL:län
     close();
     
     return 0;
